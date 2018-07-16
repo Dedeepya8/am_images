@@ -1,14 +1,15 @@
 node {
     label 'dev-builder'
-    stage('Clone repository') {
+    /*stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
  
         checkout scm
-    }
+    }*/
  
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
+         docker { image 'maven:3-alpine' }
         ubuntu = docker.build("jenkins-ms/amimages:ubuntu", "./ubuntu/")
         alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
         rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")
@@ -25,7 +26,7 @@ node {
          * First, the incremental build number from Jenkins
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
-        docker.withRegistry('https://dtr.amwaternp.net/jenkins-ms/amimages', 'dtrnplogin') {
+        docker.withRegistry('https://hub.docker.com/r/dvenigal/ubuntu', 'docker-hub-credentials') {
             ubuntu.push()
             alpine.push()
             rhel.push()
