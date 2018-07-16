@@ -1,6 +1,6 @@
 node {
     label 'dev-builder'
-    /*stage('Clone repository') {
+    stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
  
         checkout scm
@@ -9,7 +9,6 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-         docker { image 'maven:3-alpine' }
         ubuntu = docker.build("jenkins-ms/amimages:ubuntu", "./ubuntu/")
         alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
         rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")
