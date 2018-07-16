@@ -9,9 +9,10 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-        ubuntu = docker.build("jenkins-ms/amimages:ubuntu", "./ubuntu/")
-        alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
-        rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")
+          def ubuntu = docker.image('ubuntu:latest')
+         def ubuntu = docker.build("jenkins-ms/amimages:ubuntu", ')
+        /*alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
+        rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")*/
        /*app = docker.build("jenkins-ms/amimages:rhel")*/
     }
  
@@ -27,8 +28,9 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
         docker.withRegistry('https://hub.docker.com/r/dvenigal/ubuntu', 'docker-hub-credentials') {
             ubuntu.push()
-            alpine.push()
-            rhel.push()
+            ubuntu.push('latest')
+            /*alpine.push()
+            rhel.push()8/
             /*app.push("alpine")*/
             /*app.push("rhel")*/
         }
