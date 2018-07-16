@@ -9,8 +9,8 @@ node {
     stage('Build image') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
-          def ubuntu = docker.image('ubuntu:latest')
-         def ubuntu = docker.build("jenkins-ms/amimages:ubuntu", ')
+        def ubuntu = docker.image('ubuntu:latest');
+          ubuntu.pull()
         /*alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
         rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")*/
        /*app = docker.build("jenkins-ms/amimages:rhel")*/
@@ -30,7 +30,7 @@ node {
             ubuntu.push()
             ubuntu.push('latest')
             /*alpine.push()
-            rhel.push()8/
+            rhel.push()*/
             /*app.push("alpine")*/
             /*app.push("rhel")*/
         }
