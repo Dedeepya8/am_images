@@ -11,7 +11,7 @@ node {
          * docker build on the command line */
         ubuntu = docker.build("jenkins-ms/amimages:ubuntu", "./ubuntu/")
         alpine = docker.build("jenkins-ms/amimages:alpine", "./alpine/")
-        rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")
+        /*rhel   = docker.build("jenkins-ms/amimages:rhel", "./rhel/")*/
        /*app = docker.build("jenkins-ms/amimages:rhel")*/
     }
  
@@ -28,7 +28,7 @@ node {
         docker.withRegistry('https://hub.docker.com/r/dvenigal/am_images/', 'docker-hub-credentials')  {
             ubuntu.push()
             alpine.push()
-            rhel.push()
+            /*rhel.push()*/
             /*app.push("alpine")*/
             /*app.push("rhel")*/
         }
